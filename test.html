@@ -1,0 +1,81 @@
+
+<html>
+    <head>
+        <style>
+        
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            #info2 {
+                width: 40%;
+                margin: 20px auto;
+                padding: 10px;
+                background-color: darkkhaki;
+                border-radius: 8px;
+                border: 1px solid #000;
+                box-shadow: 2px 2px 5px #000;
+                box-sizing: border-box;
+            }
+            
+        </style>
+    </head>
+    <body>
+    
+        <div id="data">hello
+        
+            <p id="info"></p>
+        
+        </div>
+        <div id="info2"></div>
+          <script>
+        
+            var text = '{ "employees" : [' + 
+                '{"id":"1","email":"bypassnurseries@aol.com","password":"united81" },'+
+                '{"id":"2","email":"bypass@aol.com","password":"united81" }]}';
+            
+              var obj = JSON.parse(text);
+              
+            var data = obj.employees[1].id+" "+obj.employees[1].email;
+            
+            document.getElementById('info').innerHTML = data;
+            
+              
+              // get exturnal dada
+              
+              var xmlhttp = new XMLHttpRequest();
+              var url = "users.txt";
+              
+              xmlhttp.onreadystatechange = function() {
+                  
+                  if( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+                      
+                      var myArr = JSON.parse(xmlhttp.responseText);
+                      myFunction(myArr);
+                      
+                  }
+                  
+              };
+              
+              xmlhttp.open("GET", url, true);
+              xmlhttp.send();
+              
+              function myFunction(arr) {
+                  
+                  var out = "";
+                  var i;
+                  
+                  for(i = 0; i < arr.length; i++) {
+                      out += 'ID : '+arr[i].id+'<br>Email : '+arr[i].email+'<br>Reg date : '+arr[i].reg_date+'<br><hr><br>';
+                  }
+                  
+                  document.getElementById("info2").innerHTML = out;
+                  
+              }
+              
+              
+            
+        </script>
+        
+    </body>
+</html>

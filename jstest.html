@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Objects</title>
+    
+    <style>
+    
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #input {
+            padding: 10px 20px;
+        }
+        #input>p {
+            color: red;
+            height: 20px;
+            line-height: 20px;
+        }
+        #input>input {
+            margin: 7px 5px;
+            padding: 4px;
+        }
+        #input>button {
+            margin: 5px 7px;
+            padding: 3px 7px;
+            border-radius: 4px;
+        }
+        #data {
+            padding: 25px 15px;
+            text-align: center;
+        }
+        p {
+            font-family: aguafina-script;
+            margin-left: 20px;
+            letter-spacing: 2px;
+        }
+        #demo {
+            padding: 25px 0;
+            text-align: center;
+            font-family: aladin; 
+        }
+        
+    </style>
+</head>
+<body>
+
+    <div id="input">
+    
+        <p id="error"></p>
+        
+        First Name: <input id="fname"><br>
+        Last Name: <input id="lname"><br>
+        Age: <input id="age"><br><br>
+        
+        <button onclick="getData();" >Submit</button><br><hr>
+        
+    </div>
+    
+    <div id="data"></div>
+    
+    <div id="data2"></div>
+    
+    <div id="demo"></div>
+    
+    <script src="//use.edgefonts.net/aguafina-script;aladin.js"></script>
+    
+    <script>
+    
+        function person(first, last, age, eye) {
+            
+            this.firstName  = first;
+            this.lastName   = last;
+            this.age            = age;
+            this.eyeColor   = eye;
+            this.fullName   = first+" "+last;
+            
+        }
+        
+        function getData(){
+            
+            var fname = document.getElementById("fname").value;
+             var lname = document.getElementById("lname").value;
+             var age = document.getElementById("age").value;
+            
+            if (fname == "" || lname == "" || age == "") {
+             
+                document.getElementById("error").innerHTML = "<b>Error</b> please fill in all fields.";
+                
+            }else{
+            
+            var data = new person(fname, lname, age, "")
+            
+            document.getElementById("error").innerHTML = "";
+            document.getElementById("data2").innerHTML = "<p>Your name is <b>"+data.fullName+"</b> and your "+data.age+" years old.</p>";
+            
+            }
+        }
+        
+        var myFarther = new person("Andrew", "Brain", "56", "Brown");
+        
+        var myMother = new person("Kathryn", "Brain", "55", "Blue");
+        
+        document.getElementById("data").innerHTML = "<p>My dad is called "+myFarther.fullName+" and is "+myFarther.age+" years old.</p><br><p>My Mum is called "+myMother.firstName+" and is "+myMother.age+" years old.</p>";
+        
+        var txt = "";
+        var x;
+        
+        for (x in myMother) {
+            txt += myMother[x]+"<br>";
+        }
+        
+        document.getElementById("demo").innerHTML = "<h2>"+txt+"</h2>";
+        
+    </script>
+
+</body>
+</html>

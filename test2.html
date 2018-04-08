@@ -1,0 +1,89 @@
+
+<html>
+    <head>
+        <style>
+        
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            #info2 {
+                width: 40%;
+                margin: 20px auto;
+                background-color: darkkhaki;
+                border-radius: 8px;
+                border: 1px solid #000;
+                box-shadow: 2px 2px 5px #000;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+            #info2>p {
+                padding: 15px;
+            }
+            #info2>p:nth-child(even) {
+                background-color: #ccc;
+                color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <div id="data">hello
+        
+            <p id="info"></p>
+        
+        </div>
+        <div id="info2"></div>
+          <script>
+        
+            var text = '{ "employees" : [' + 
+                '{"id":"1","email":"bypassnurseries@aol.com","password":"united81" },'+
+                '{"id":"2","email":"bypass@aol.com","password":"united81" }]}';
+            
+              var obj = JSON.parse(text);
+              
+            var data = obj.employees[1].id+" "+obj.employees[1].email;
+            
+            document.getElementById('info').innerHTML = data;
+            
+              
+              // get exturnal dada
+              
+              var xmlhttp = new XMLHttpRequest();
+              var url = "http://www.w3schools.com/website/Customers_MYSQL.php";
+              
+              xmlhttp.onreadystatechange = function() {
+                  
+                  if( xmlhttp.readyState == 4 && xmlhttp.status == 200 ) {
+                      
+                      var data = JSON.parse(xmlhttp.responseText);
+                      getData(data);
+                      
+                  }
+                  
+              };
+              
+              xmlhttp.open("GET", url, true);
+              xmlhttp.send();
+              
+              function getData(arr) {
+                  
+                  var out = "";
+                  var i;
+                  var id = 1;
+                  
+                  for(i = 0; i < arr.length; i++) {
+                      out += '<p>ID : '+id+'<br>Name : '+arr[i].Name+'<br>City : '+arr[i].City+'<br>Country : '+arr[i].Country+'</p>';
+                      id ++
+                  }
+                  alert(arr.length);
+                  document.getElementById("info2").innerHTML = out;
+                  
+              }
+              
+              
+            
+        </script>
+        
+    </body>
+</html>
